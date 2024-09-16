@@ -35,12 +35,11 @@ class NoteItem extends HTMLElement {
   }
  
   _updateStyle() {
-    const bgColor = 'white';
     this._style.textContent = `
       :host {
         display: block;
         border-radius: 8px;
-        background-color: ${bgColor};
+        background-color: #FADFA1;
         overflow: hidden;
       }
  
@@ -53,11 +52,13 @@ class NoteItem extends HTMLElement {
       }
  
       .note-info {
+        display: flex;
+        flex-direction: column;
         padding: 16px 24px;
       }
  
       .note-info__title h2 {
-        font-weight: lighter;
+        font-weight: bold;
       }
  
       .note-info__description p {
@@ -73,6 +74,7 @@ class NoteItem extends HTMLElement {
 
       .action-bar {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
       }
@@ -86,7 +88,7 @@ class NoteItem extends HTMLElement {
         }
       
       .delete-button {
-        background-color: #C7253E;
+        background-color: #C96868;
         width: fit-content;
         margin-top: 10px;
         padding: 10px 20px;
@@ -96,7 +98,7 @@ class NoteItem extends HTMLElement {
         cursor: pointer;
       }
       .delete-button:hover {
-        background-color: #821131;
+        background-color: #C99999;
       }
     `;
   }

@@ -18,7 +18,6 @@ class FooterBar extends HTMLElement {
                 width: 100%;
                 color: ${this._color};
                 background-color: ${this._bgcolor};
-                box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
                 
             }
             div {
