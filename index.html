@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Notes</title>
+
+    <!-- Own Styles -->
+    <link rel="icon" href="/src/public/favicon.png" sizes="512x512" />
+
+    <!-- Favicons -->
+    <link rel="stylesheet" href="/src/styles/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <section id="note" class="note">
+          <div class="title-section">
+            <h2>My Notes</h2>
+          </div>
+          <div id="searchBarContainer" class="search-bar-container">
+            <search-bar></search-bar>
+          </div>
+
+          <div id="noteListContainer" class="note-list-container">
+            <div class="placeholder query-waiting">Waiting for search keyword</div>
+            <div class="placeholder search-loading">Loading</div>
+            <note-list></note-list>
+          </div>
+        </section>
+      </div>
+      <div class="add-note">
+        <button id="addNoteButton"><img src="src/public/addition.png" alt="add new note"> New Note </button>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add Note</h2>
+            <form id="addNote" class="add-note-form">
+                <input 
+                  id="title" 
+                  name="title" 
+                  type="text" 
+                  placeholder="Title" 
+                  minlength="6" 
+                  autocomplete="off" 
+                  aria-describedby="titleValidation" 
+                  required/>
+                <div class="alert" id="titleValidation" style="display: none;">
+                </div> 
+                <textarea rows="4" cols="100" id="body" name="body" placeholder="body" required></textarea>  
+                <label for="favcolor">Select your favorite color:</label>
+                <select name="favcolor" id="favcolor">
+                  <option value="#D1E9F6" style="background-color: #D1E9F6;">#D1E9F6</option>
+                  <option value="#F6EACB" style="background-color: #F6EACB;">#F6EACB</option>
+                  <option value="#F1D3CE" style="background-color: #F1D3CE;">#F1D3CE</option>
+                  <option value="#EECAD5" style="background-color: #EECAD5;">#EECAD5</option>
+                </select>
+                <button>Save Note</button>
+            </form>
+        </div>
+      </div>
+      <footer>
+        <footer-bar bgcolor="white" color="black"></footer-bar>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/app.js"></script> 
+  </body>
+</html>

@@ -1,0 +1,329 @@
+* {
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+}
+
+body {    
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: #F0F0F0;
+}
+
+/* GLOBAL */
+.container {
+  max-width: 800px;
+
+  padding-block: 32px;
+  padding-inline: 16px;
+  margin-inline: auto;
+}
+
+.card {
+  border-radius: 8px;
+
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+label {
+  display: block;
+}
+
+section > .title-section {
+  margin-block-end: 2rem;
+
+  font-size: 1.2em;
+}
+/* GLOBAL */
+
+/* Start of Header */
+header {
+  background-color: cornflowerblue;
+
+  color: beige;
+}
+
+.app-bar {
+  padding: 24px 20px;
+}
+
+.app-bar .brand-name {
+  margin: 0;
+
+  font-size: 1.7em;
+}
+/* End of Header */
+/* Start of Main */
+main {
+  min-height: 100vh;
+}
+
+/* Start of Search Bar */
+.search-bar-container {
+  display: inline;
+}
+.floating-form {
+  background-color: white;
+  padding: 16px;
+  border-radius: 5px;
+  position: sticky;
+  top: 10px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.search-form {
+  display: flex;
+  gap: 16px;
+}
+.search-form .form-group {
+  flex-grow: 1;
+  position: relative;
+}
+
+.search-form .form-group input {
+  display: block;
+  width: 100%;
+  height: 60px;
+  padding: 14px 10px 0 10px;
+  border-inline: none;
+  border-block-start: none;
+  border-block-end: 1px solid cornflowerblue;
+  font-size: 1em;
+}
+.search-form .form-group input:focus-visible {
+  outline: 0;
+}
+.search-form .form-group label {
+  line-height: 60px;
+  font-size: 1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: cornflowerblue;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  user-select: none;
+  pointer-events: none;
+  transition: 150ms all ease-in-out;
+}
+.search-form .form-group input:focus-visible ~ label,
+.search-form .form-group input:valid ~ label {
+  left: 10px;
+  top: -16px;
+  font-size: 0.8em;
+}
+.search-form button{
+  border: 0;
+  border-radius: 5px;
+  padding-inline: 24px;
+  background-color: cornflowerblue;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: 100ms linear;
+}
+.search-form button:hover {
+  background-color: #4485ff;
+}
+.search-form button:active{
+  background-color: #6c9aee;
+}
+/* End of Search Bar */
+
+.note-list-container {
+  margin-block-start: 32px;
+}
+
+.note-list .list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* .note-list .list > * {
+  float: left;
+  width: 49%;
+
+  margin-block-end: 3%;
+}
+
+.note-list .list > *:nth-child(odd) {
+  float: left;
+}
+
+.note-list .list > *:nth-child(even) {
+  margin-inline-start: 2%;
+} */
+
+.note-list .list .card .fan-art-note {
+  width: 100%;
+  max-height: 450px;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.note-list .list .card .note-info {
+  padding: 16px 24px;
+}
+
+.note-list .list .card .note-info__title h2 {
+  font-weight: lighter;
+}
+
+.note-list .list .card .note-info__description p {
+  display: -webkit-box;
+  margin-top: 10px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; /* number of lines to show */
+}
+
+.note-list-container .placeholder {
+  margin-block: 1rem;
+
+  font-size: 1.5rem;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.5);
+}
+/* End of Main */
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 12px;
+  width: 80%;
+}
+
+.add-note-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.add-note-form input, textarea, select{
+  display: block;
+  width: 100%;
+  height: 60px;
+  padding: 14px 10px 0 10px;
+  background-color: #e9e9e9;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+}
+.add-note-form textarea {
+  resize: none;
+  height: 250px;
+}
+
+.add-note-form button {
+  border: 0;
+  width: 200px;
+  padding: 10px 10px;
+  border-radius: 12px;
+  padding-inline: 24px;
+  background-color: #3FA2F6;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: 100ms linear;
+}
+.add-note-form button:hover {
+  background-color: #96C9F4;
+}
+.add-note-form button:active{
+  background-color: #3FA2F6;
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* End of Modal */
+/* button add */
+.add-note{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: fixed;
+  bottom: 10px;
+}
+.add-note button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  height: 50px;
+  border-radius: 50px;
+  padding-inline: 24px;
+  background-color: #3FA2F6;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: 100ms linear;
+}
+.add-note button:hover{
+  background-color: #96C9F4;
+}
+.add-note button img{
+  width: 20px;
+}
+/* End of Add */
