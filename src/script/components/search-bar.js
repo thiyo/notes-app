@@ -113,7 +113,7 @@ class SearchBar extends HTMLElement {
                 <div class="form-group">
                     <input id="name" name="name" type="search" placeholder="search notes" />
                 </div>
-                <button><img src="src/public/filter.png" width="40px" alt="filter"></button>
+                <button><img src="filter.png" width="40px" alt="filter"></button>
             </form>
         </div>
       `;

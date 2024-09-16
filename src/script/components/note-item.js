@@ -7,7 +7,6 @@ class NoteItem extends HTMLElement {
     id: null,
     title: null,
     body: null,
-    favColor: null,
     createdAt: null,
     archived: null,
   };
