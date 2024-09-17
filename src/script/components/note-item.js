@@ -1,5 +1,5 @@
 import Notes from "../data/api/notes.js";
-import Home from "../view/home.js";
+
 class NoteItem extends HTMLElement {
   _shadowRoot = null;
   _style = null;
@@ -84,8 +84,12 @@ class NoteItem extends HTMLElement {
         border: none;
         color: white;
         border-radius: 12px;
+        cursor: pointer;
         }
       
+      .note-info__archived:hover {
+        background-color: #C99999;
+        }
       .delete-button {
         background-color: #C96868;
         width: fit-content;
@@ -112,10 +116,10 @@ class NoteItem extends HTMLElement {
     let status;
     let color;
     if (this._note.archived) {
-        status = "archived";
+        status = "Unarchive";
         color = "red";
     } else {
-        status = "active";
+        status = "Archive";
         color = "green";
     }
     this._shadowRoot.appendChild(this._style);
@@ -129,26 +133,75 @@ class NoteItem extends HTMLElement {
           <div class="note-info__description">
             <p>${this._note.body}</p>
             <div class= "action-bar">
-            <div class="note-info__archived" style = "background-color: ${color};" >${status}</div>
+            <button id="${this._note.id}  type="button" class="btn note-info__archived"  style = "background-color: ${color};" >${status}</button>
             <button type="button" class="btn btn-danger delete-button" id="${this._note.id}">Hapus</button>
           </div>
         </div>
-      </div>
     `;
     const button = this._shadowRoot.querySelector('.delete-button');
+    const archived = this._shadowRoot.querySelector('.note-info__archived');
 
     button.addEventListener('click', onDeleteNote);
-  
+    if(this._note.archived) { 
+      archived.addEventListener('click', onArchivedNote);
+    }else
+    {
+      archived.addEventListener('click', onUnarchivedNote);
+    }
   }
   
 }
+const Swal = require('sweetalert2');
 const onDeleteNote = async function(event) {
   const Id = event.target.id;
-      let text = "Kamu akan menghapus catatan ini";
-      if (confirm(text) == true) {
-        await Notes.deleteNote(Id);
-      } 
   event.preventDefault();
-  Home();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Notes.deleteNote(Id);
+        }
+      });
+}
+const onArchivedNote = async function(event) {
+  const Id = event.target.id;
+  event.preventDefault();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Archive it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Notes.archiveNote(Id)
+        }
+      });
+}
+
+const onUnarchivedNote = async function(event) {
+  const Id = event.target.id;
+  event.preventDefault();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Archive it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log(Notes.unarchiveNote(Id))
+        }
+      });
 }
 customElements.define('note-item', NoteItem);

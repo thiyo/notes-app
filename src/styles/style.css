@@ -61,6 +61,7 @@ main {
   min-height: 100vh;
 }
 
+  
 .note-list-container {
   margin-block-start: 32px;
 }
@@ -96,6 +97,7 @@ main {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5; /* number of lines to show */
 }
+
 
 .note-list-container .placeholder {
   margin-block: 1rem;

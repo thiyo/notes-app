@@ -1,5 +1,6 @@
 import Utils from '../utils.js';
 import Notes from '../data/api/notes.js';
+import Swal from 'sweetalert2';
 
 const home = () => {
   const searchFormElement = document.querySelector('search-bar');
@@ -9,9 +10,12 @@ const home = () => {
   const noteQueryWaitingElement = noteListContainerElement.querySelector('.query-waiting');
   const noteLoadingElement = noteListContainerElement.querySelector('.search-loading');
   const noteListElement = noteListContainerElement.querySelector('note-list');
+  const archivedListElement = noteListContainerElement.querySelector('archived-list');
   const modalAdd = document.getElementById("myModal");
   const addBtn = document.getElementById("addNoteButton");
   const span = document.getElementsByClassName("close")[0]; 
+
+  
   // When the user clicks the button, open the modal 
 addBtn.onclick = function() {
   modalAdd.style.display = "block";
@@ -32,14 +36,19 @@ window.onclick = function(event) {
     const body = document.getElementById('body').value;
 
     Notes.saveNote( title, body);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Your note has been saved",
+      showConfirmButton: false,
+      timer: 1500
+    });
     submitNoteFormElement.reset();
-    modal.style.display = "none";
+    modalAdd.style.display = "none";
     event.preventDefault();
     const result = await Notes.getAllNotes();
-    displayResult(result);
+    displayResult(result);    
   }
-
-
 
   const showNote = async function(query) {//
     showLoading();
@@ -82,6 +91,17 @@ window.onclick = function(event) {
     noteListElement.append(...noteItemElements);
   };
 
+  
+  const displayArchivedResult = (notes) => {
+    const archivedItemElements = notes.map((note) => {
+      const archivedItemElements = document.createElement('note-item');
+      archivedItemElements.note = note;
+      return archivedItemElements;
+    });
+    Utils.emptyElement(archivedListElement);
+    archivedListElement.append(...archivedItemElements);
+  };
+
   const showLoading = () => {
     Array.from(noteListContainerElement.children).forEach((element) => {
       Utils.hideElement(element);
@@ -96,7 +116,7 @@ window.onclick = function(event) {
     Utils.showElement(noteListElement);
   };
   
-  const showQueryWaiting = async function() {
+  const showQueryWaiting = async function() { 
     const notes =  await Notes.getAllNotes();
     displayResult(notes);
     console.log(notes);
@@ -107,7 +127,10 @@ window.onclick = function(event) {
     Utils.showElement(noteQueryWaitingElement);
   };
 
-
+  const showArcivedNotes = async function() {
+    const notes =  await Notes.getArchivedNotes();
+    displayArchivedResult(notes);
+  }
   searchFormElement.addEventListener('search', onSearchHandler); 
   submitNoteFormElement.addEventListener('submit', onSaveNote); 
   
@@ -131,6 +154,7 @@ window.onclick = function(event) {
     }
     });
   showQueryWaiting();
+  showArcivedNotes();
 };
 
 export default home;
