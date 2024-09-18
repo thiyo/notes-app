@@ -34,11 +34,17 @@ class NoteItem extends HTMLElement {
   }
 
   _updateStyle() {
+    let bgcolor ;
+    if (!this._note.archived) {
+      bgcolor = "#FADFA1";
+    } else {
+      bgcolor = "#ECDFCC";
+    }
     this._style.textContent = `
       :host {
         display: block;
         border-radius: 8px;
-        background-color: #FADFA1;
+        background-color: ${bgcolor};
         overflow: hidden;
       }
  
@@ -146,7 +152,7 @@ class NoteItem extends HTMLElement {
           <div class="note-info__description">
             <p>${this._note.body}</p>
             <div class= "action-bar">
-            <button id="${this._note.id}  type="button" class="btn note-info__archived"  style = "background-color: ${color};" >${status}</button>
+            <button id="${this._note.id}"  type="button" class="btn note-info__archived"  style = "background-color: ${color};" >${status}</button>
             <button type="button" class="btn btn-danger delete-button" id="${this._note.id}">Hapus</button>
           </div>
         </div>

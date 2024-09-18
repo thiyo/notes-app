@@ -26,7 +26,7 @@ class ArchivedList extends HTMLElement {
         display: block;
       }
       
-      .archived-list {
+      .list {
         display: grid;
         grid-template-columns: ${"1fr ".repeat(this.column)};
       
@@ -67,7 +67,7 @@ class ArchivedList extends HTMLElement {
 
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `
-      <div class="archived-list">
+      <div class="list">
         <slot></slot>
       </div>
     `;
@@ -86,5 +86,4 @@ class ArchivedList extends HTMLElement {
     this.render();
   }
 }
-
 customElements.define("archived-list", ArchivedList);

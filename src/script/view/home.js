@@ -58,7 +58,7 @@ const home = () => {
     const result = await searchNote(query);
     if (result.length === 0) {
       Utils.hideElement(noteLoadingElement);
-    }
+    } 
     displayResult(result);
     showNoteList();
   };
@@ -132,7 +132,13 @@ const home = () => {
   const showArcivedNotes = async function () {
     const notes = await getArchivedNotes();
     displayArchivedResult(notes);
+    Array.from(noteListContainerElement.children).forEach((element) => {
+      Utils.hideElement(noteQueryWaitingElement);
+      Utils.hideElement(noteLoadingElement);
+    });
+    Utils.showElement(noteQueryWaitingElement);
   };
+
   searchFormElement.addEventListener("search", onSearchHandler);
   submitNoteFormElement.addEventListener("submit", onSaveNote);
 

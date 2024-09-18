@@ -65,12 +65,12 @@ main {
   margin-block-start: 32px;
 }
 
-.note-list .list .archived-list{
+.note-list .list {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
-.note-list .list .card .fan-art-note .archived-list {
+.note-list .list .card .fan-art-note  {
   width: 100%;
   max-height: 450px;
 
@@ -78,15 +78,15 @@ main {
   object-position: center;
 }
 
-.note-list .list .card .note-info .archived-list{
+.note-list .list .card .note-info {
   padding: 16px 24px;
 }
 
-.note-list .list .card .note-info__title h2 .archived-list{
+.note-list .list .card .note-info__title h2 {
   font-weight: lighter;
 }
 
-.note-list .list .card .note-info__description p .archived-list{
+.note-list .list .card .note-info__description p{
   display: -webkit-box;
   margin-top: 10px;
 

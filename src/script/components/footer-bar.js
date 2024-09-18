@@ -30,6 +30,7 @@ class FooterBar extends HTMLElement {
             }
         `;
   }
+
   _emptyContent() {
     this._shadowRoot.innerHTML = "";
   }
