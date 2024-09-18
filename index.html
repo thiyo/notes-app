@@ -1,12 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My Notes</title>
-     
-    <link rel="icon" href="favicon.png" sizes="50x50" />
 
+    <link rel="icon" href="favicon.png" sizes="50x50" />
   </head>
   <body>
     <main>
@@ -20,17 +19,23 @@
           </div>
 
           <div id="noteListContainer" class="note-list-container">
-            <div class="placeholder query-waiting">Waiting for search keyword</div>
+            <div class="placeholder query-waiting">
+              Waiting for search keyword
+            </div>
             <div class="placeholder search-loading">Loading</div>
-            <note-list></note-list><br>
-            <hr><br>
-            <h3>Archived Noted</h3><br>
+            <note-list></note-list><br />
+            <hr />
+            <br />
+            <h3>Archived Noted</h3>
+            <br />
             <archived-list></archived-list>
           </div>
         </section>
       </div>
       <div class="add-note">
-        <button id="addNoteButton"><img src="addition.png" alt="add new note"> New Note </button>
+        <button id="addNoteButton">
+          <img src="addition.png" alt="add new note" /> New Note
+        </button>
       </div>
       <!-- The Modal -->
       <div id="myModal" class="modal">
@@ -38,12 +43,28 @@
         <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Add Note</h2>
-            <form id="addNote" class="add-note-form">
-                <input id="title" name="title" type="text" placeholder="Title" minlength="6" autocomplete="off" aria-describedby="titleValidation" required/>
-                <div class="alert" id="titleValidation" style="display: none;"></div> 
-                <textarea rows="4" cols="100" id="body" name="body" placeholder="body" required></textarea>  
-                <button>Save Note</button>
-            </form>
+          <form id="addNote" class="add-note-form">
+            <input
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Title"
+              minlength="6"
+              autocomplete="off"
+              aria-describedby="titleValidation"
+              required
+            />
+            <div class="alert" id="titleValidation" style="display: none"></div>
+            <textarea
+              rows="4"
+              cols="100"
+              id="body"
+              name="body"
+              placeholder="body"
+              required
+            ></textarea>
+            <button>Save Note</button>
+          </form>
         </div>
       </div>
       <footer>

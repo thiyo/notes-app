@@ -1,4 +1,4 @@
-import Notes from "../data/api/notes.js";
+import {deleteNote, archiveNote, unarchiveNote, getArchivedNotes} from "../data/api/notes.js";
 
 class NoteItem extends HTMLElement {
   _shadowRoot = null;
@@ -10,29 +10,29 @@ class NoteItem extends HTMLElement {
     createdAt: null,
     archived: null,
   };
- 
+
   constructor() {
     super();
- 
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._style = document.createElement('style');
+
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._style = document.createElement("style");
   }
- 
+
   _emptyContent() {
-    this._shadowRoot.innerHTML = '';
+    this._shadowRoot.innerHTML = "";
   }
- 
+
   set note(value) {
     this._note = value;
- 
+
     // Render ulang
     this.render();
   }
- 
+
   get note() {
     return this._note;
   }
- 
+
   _updateStyle() {
     this._style.textContent = `
       :host {
@@ -105,22 +105,35 @@ class NoteItem extends HTMLElement {
       }
     `;
   }
- 
+
   render() {
     this._emptyContent();
     this._updateStyle();
     let mydate = new Date(this._note.createdAt);
-    let month = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"][mydate.getMonth()];
-    let newCreatedDate = mydate.getDate() + ' ' + month + ' ' + mydate.getFullYear();
+    let month = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ][mydate.getMonth()];
+    let newCreatedDate =
+      mydate.getDate() + " " + month + " " + mydate.getFullYear();
     let status;
     let color;
     if (this._note.archived) {
-        status = "Unarchive";
-        color = "red";
+      status = "Unarchive";
+      color = "red";
     } else {
-        status = "Archive";
-        color = "green";
+      status = "Archive";
+      color = "green";
     }
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `
@@ -138,70 +151,68 @@ class NoteItem extends HTMLElement {
           </div>
         </div>
     `;
-    const button = this._shadowRoot.querySelector('.delete-button');
-    const archived = this._shadowRoot.querySelector('.note-info__archived');
+    const button = this._shadowRoot.querySelector(".delete-button");
+    const archived = this._shadowRoot.querySelector(".note-info__archived");
 
-    button.addEventListener('click', onDeleteNote);
-    if(this._note.archived) { 
-      archived.addEventListener('click', onArchivedNote);
-    }else
-    {
-      archived.addEventListener('click', onUnarchivedNote);
+    button.addEventListener("click", onDeleteNote);
+    if (!this._note.archived) {
+      archived.addEventListener("click", onArchivedNote);
+    } else {
+      archived.addEventListener("click", onUnarchivedNote);
     }
   }
-  
 }
-const Swal = require('sweetalert2');
-const onDeleteNote = async function(event) {
+const Swal = require("sweetalert2");
+const onDeleteNote = async function (event) {
   const Id = event.target.id;
   event.preventDefault();
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Notes.deleteNote(Id);
-        }
-      });
-}
-const onArchivedNote = async function(event) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteNote(Id);
+    }
+  });
+};
+const onArchivedNote = async function (event) {
   const Id = event.target.id;
   event.preventDefault();
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Archive it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Notes.archiveNote(Id)
-        }
-      });
-}
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Archive it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      archiveNote(Id);
+    }
+  });
+};
 
-const onUnarchivedNote = async function(event) {
+const onUnarchivedNote = async function (event) {
   const Id = event.target.id;
   event.preventDefault();
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Archive it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log(Notes.unarchiveNote(Id))
-        }
-      });
-}
-customElements.define('note-item', NoteItem);
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Archive it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      unarchiveNote(Id);
+    }
+  });
+};
+customElements.define("note-item", NoteItem);
